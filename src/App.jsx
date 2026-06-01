@@ -99,6 +99,29 @@ const trips = [
       "/images/2026-anji-2-04.jpeg",
     ],
   },
+    {
+    id: 6,
+    title: "Shanghai, China",
+    date: "2026-05-25 – 2026-05-31",
+    address: "Shanghai",
+    position: [31.145806, 121.65525],
+    memory: "Forever living in a fairytale — forever my princess.",
+    photos: [
+      "/images/2026-shanghai-01.jpeg",
+      "/images/2026-shanghai-02.jpeg",
+      "/images/2026-shanghai-03.jpeg",
+      "/images/2026-shanghai-04.jpeg",
+      "/images/2026-shanghai-05.jpeg",
+      "/images/2026-shanghai-06.jpeg",
+      "/images/2026-shanghai-07.jpeg",
+      "/images/2026-shanghai-08.jpeg",
+      "/images/2026-shanghai-09.jpeg",
+      "/images/2026-shanghai-10.jpeg",
+      "/images/2026-shanghai-11.jpeg",
+      "/images/2026-shanghai-12.jpeg",
+      "/images/2026-shanghai-13.jpeg",
+    ],
+  },
 ];
 
 export default function App() {
