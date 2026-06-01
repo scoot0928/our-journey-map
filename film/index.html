@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>A Quiet Film for Maggie</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #070b14;
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      color: #fff;
+    }
+
+    body {
+      cursor: pointer;
+    }
+
+    /* =========================================================
+       SCENE — 微电影海边晚霞
+    ========================================================= */
+
+    .scene {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 52% 54%,
+          rgba(255, 228, 170, 0.86) 0%,
+          rgba(255, 164, 126, 0.52) 13%,
+          rgba(255, 110, 146, 0.30) 27%,
+          rgba(126, 87, 177, 0.26) 46%,
+          transparent 66%),
+        radial-gradient(circle at 50% 62%,
+          rgba(255, 155, 126, 0.34) 0%,
+          rgba(255, 119, 151, 0.18) 28%,
+          transparent 56%),
+        linear-gradient(to bottom,
+          #202442 0%,
+          #7f4f83 22%,
+          #e0705c 45%,
+          #f0a13e 57%,
+          #1b3950 76%,
+          #07111f 100%);
+      animation: skyDarken 42s linear forwards;
+      will-change: filter;
+    }
+
+    @keyframes skyDarken {
+      0% {
+        filter: brightness(1.12) saturate(1.16);
+      }
+
+      55% {
+        filter: brightness(0.96) saturate(1.08);
+      }
+
+      100% {
+        filter: brightness(0.48) saturate(0.88);
+      }
+    }
+
+    .sunset-clouds {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 30% 24%,
+          rgba(255, 139, 86, 0.24) 0%,
+          rgba(255, 139, 86, 0.12) 22%,
+          transparent 48%),
+        radial-gradient(ellipse at 55% 20%,
+          rgba(255, 185, 92, 0.30) 0%,
+          rgba(255, 104, 82, 0.18) 24%,
+          transparent 52%),
+        radial-gradient(ellipse at 78% 30%,
+          rgba(255, 133, 79, 0.24) 0%,
+          rgba(255, 100, 94, 0.12) 24%,
+          transparent 56%),
+        radial-gradient(ellipse at 45% 40%,
+          rgba(255, 195, 103, 0.26) 0%,
+          rgba(255, 130, 72, 0.15) 26%,
+          transparent 58%);
+      filter: blur(3px);
+      opacity: 0.88;
+      animation: cloudsGlow 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes cloudsGlow {
+      from {
+        transform: translateX(-1%) translateY(0);
+        opacity: 0.78;
+      }
+
+      to {
+        transform: translateX(1.5%) translateY(1%);
+        opacity: 0.96;
+      }
+    }
+
+    .horizon-glow {
+      position: absolute;
+      left: 50%;
+      top: 58%;
+      width: 58vw;
+      height: 28vh;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at center,
+          rgba(255, 244, 176, 0.88) 0%,
+          rgba(255, 192, 86, 0.66) 16%,
+          rgba(255, 126, 62, 0.32) 38%,
+          rgba(255, 82, 96, 0.15) 58%,
+          transparent 78%);
+      filter: blur(8px);
+      animation: horizonFade 42s linear forwards;
+    }
+
+    @keyframes horizonFade {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      72% {
+        opacity: 0.68;
+      }
+
+      100% {
+        opacity: 0.24;
+        transform: translate(-50%, -50%) scale(1.08);
+      }
+    }
+
+    .sun {
+      position: absolute;
+      left: 52%;
+      top: 55%;
+      width: 118px;
+      height: 118px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      background:
+        radial-gradient(circle,
+          rgba(255, 252, 221, 0.98) 0%,
+          rgba(255, 217, 132, 0.88) 38%,
+          rgba(255, 148, 78, 0.52) 68%,
+          rgba(255, 104, 78, 0.08) 100%);
+      box-shadow:
+        0 0 42px rgba(255, 226, 151, 0.56),
+        0 0 115px rgba(255, 145, 92, 0.36),
+        0 0 180px rgba(255, 90, 120, 0.20);
+      z-index: 4;
+      animation: sunSlowDown 42s linear forwards;
+    }
+
+    @keyframes sunSlowDown {
+      0% {
+        top: 52%;
+        opacity: 0.95;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      48% {
+        top: 57%;
+        opacity: 0.82;
+        transform: translate(-50%, -50%) scale(0.96);
+      }
+
+      72% {
+        top: 60%;
+        opacity: 0.42;
+        transform: translate(-50%, -50%) scale(0.92);
+      }
+
+      100% {
+        top: 64%;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.88);
+      }
+    }
+
+    /* =========================================================
+       SEA — 简洁分层海面
+    ========================================================= */
+
+    .sea {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 42%;
+      overflow: hidden;
+      z-index: 5;
+      background:
+        linear-gradient(to bottom,
+          rgba(56, 132, 158, 0.92) 0%,
+          rgba(33, 84, 104, 0.96) 42%,
+          rgba(8, 30, 46, 1) 100%);
+    }
+
+    .gold-reflection {
+      position: absolute;
+      left: 52%;
+      top: -1%;
+      width: 28%;
+      height: 108%;
+      transform: translateX(-50%);
+      clip-path: polygon(42% 0, 58% 0, 88% 100%, 12% 100%);
+      background:
+        linear-gradient(to bottom,
+          rgba(255, 220, 130, 0.30) 0%,
+          rgba(255, 166, 88, 0.22) 28%,
+          rgba(255, 120, 86, 0.10) 60%,
+          transparent 100%);
+      filter: blur(1px);
+      animation: reflectionFade 42s linear forwards;
+    }
+
+    @keyframes reflectionFade {
+      0% {
+        opacity: 0.95;
+      }
+
+      70% {
+        opacity: 0.50;
+      }
+
+      100% {
+        opacity: 0.16;
+      }
+    }
+
+    .wave {
+      position: absolute;
+      left: -10%;
+      width: 120%;
+      height: 34px;
+      border-radius: 50%;
+      border-top: 1px solid rgba(255, 255, 255, 0.10);
+      animation: waveMove 7s ease-in-out infinite;
+    }
+
+    .wave:nth-child(2) { top: 8%; animation-duration: 6.4s; opacity: 0.58; }
+    .wave:nth-child(3) { top: 20%; animation-duration: 7.2s; opacity: 0.50; }
+    .wave:nth-child(4) { top: 34%; animation-duration: 8s; opacity: 0.42; }
+    .wave:nth-child(5) { top: 50%; animation-duration: 8.8s; opacity: 0.34; }
+    .wave:nth-child(6) { top: 66%; animation-duration: 9.6s; opacity: 0.28; }
+    .wave:nth-child(7) { top: 82%; animation-duration: 10.4s; opacity: 0.22; }
+
+    @keyframes waveMove {
+      0%, 100% {
+        transform: translateX(-1%) scaleY(1);
+      }
+
+      50% {
+        transform: translateX(1.2%) scaleY(1.18);
+      }
+    }
+
+    .shore {
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 22%;
+      z-index: 8;
+      background:
+        linear-gradient(to bottom,
+          rgba(9, 16, 20, 0) 0%,
+          rgba(5, 12, 18, 0.68) 58%,
+          rgba(4, 10, 14, 1) 100%);
+    }
+
+    /* =========================================================
+       TWO BOATS
+    ========================================================= */
+
+    .boat {
+      position: absolute;
+      top: 57.6%;
+      left: 34%;
+      width: 80px;
+      height: 38px;
+      z-index: 7;
+      opacity: 0.64;
+      animation: boatFloat 8s ease-in-out infinite, boatMove 48s linear infinite;
+    }
+
+    .boat.two {
+      top: 58.6%;
+      left: 76%;
+      transform: scale(0.64);
+      opacity: 0.45;
+      animation: boatFloatTwo 9s ease-in-out infinite, boatMoveTwo 54s linear infinite;
+    }
+
+    .boat::before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      bottom: 4px;
+      width: 68px;
+      height: 15px;
+      background: rgba(5, 10, 15, 0.82);
+      clip-path: polygon(0 0, 100% 0, 78% 100%, 18% 100%);
+      border-radius: 0 0 26px 26px;
+    }
+
+    .boat::after {
+      content: "";
+      position: absolute;
+      left: 36px;
+      bottom: 17px;
+      width: 2px;
+      height: 34px;
+      background: rgba(5, 10, 15, 0.76);
+      box-shadow: 12px 11px 0 9px rgba(5, 10, 15, 0.42);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    @keyframes boatFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    @keyframes boatFloatTwo {
+      0%, 100% { transform: scale(0.64) translateY(0); }
+      50% { transform: scale(0.64) translateY(-5px); }
+    }
+
+    @keyframes boatMove {
+      from { margin-left: -28px; }
+      to { margin-left: 140px; }
+    }
+
+    @keyframes boatMoveTwo {
+      from { margin-left: 72px; }
+      to { margin-left: -120px; }
+    }
+
+    /* =========================================================
+       BEACH + SIMPLE PALM SILHOUETTE
+    ========================================================= */
+
+    .beach {
+      position: absolute;
+      left: 0;
+      bottom: -3%;
+      width: 100%;
+      height: 24%;
+      background: #061018;
+      clip-path: polygon(
+        0 50%,
+        20% 38%,
+        42% 68%,
+        64% 82%,
+        82% 60%,
+        100% 66%,
+        100% 100%,
+        0 100%
+      );
+      z-index: 9;
+    }
+
+    .palm {
+      position: absolute;
+      width: 180px;
+      height: 330px;
+      z-index: 10;
+      transform-origin: bottom center;
+      pointer-events: none;
+    }
+
+    .palm.left {
+      left: 5%;
+      bottom: 11%;
+      transform: scale(0.95) rotate(-4deg);
+    }
+
+    .palm.right {
+      right: 5%;
+      bottom: 10%;
+      transform: scale(1.05) scaleX(-1) rotate(-4deg);
+    }
+
+    .trunk {
+      position: absolute;
+      left: 82px;
+      bottom: 0;
+      width: 22px;
+      height: 245px;
+      background: rgba(4, 8, 13, 0.96);
+      border-radius: 60px;
+      transform-origin: bottom center;
+      transform: rotate(8deg);
+      filter: blur(0.2px);
+    }
+
+    .leaf {
+      position: absolute;
+      left: 92px;
+      top: 58px;
+      width: 135px;
+      height: 28px;
+      background: rgba(4, 8, 13, 0.96);
+      border-radius: 100% 8% 100% 8%;
+      transform-origin: left center;
+      filter: blur(0.25px);
+      animation: leafSway 5.2s ease-in-out infinite;
+    }
+
+    .leaf:nth-child(2) {
+      transform: rotate(-118deg) scaleX(0.82);
+      width: 118px;
+      animation-delay: 0s;
+    }
+
+    .leaf:nth-child(3) {
+      transform: rotate(-70deg) scaleX(1.05);
+      width: 145px;
+      animation-delay: .2s;
+    }
+
+    .leaf:nth-child(4) {
+      transform: rotate(-24deg) scaleX(1.12);
+      width: 152px;
+      animation-delay: .4s;
+    }
+
+    .leaf:nth-child(5) {
+      transform: rotate(20deg) scaleX(1.02);
+      width: 136px;
+      animation-delay: .6s;
+    }
+
+    .leaf:nth-child(6) {
+      transform: rotate(62deg) scaleX(0.78);
+      width: 110px;
+      animation-delay: .8s;
+    }
+
+    @keyframes leafSway {
+      0%, 100% {
+        margin-top: 0;
+        margin-left: 0;
+      }
+
+      50% {
+        margin-top: 5px;
+        margin-left: 3px;
+      }
+    }
+
+    /* =========================================================
+       CARD CLOUD
+    ========================================================= */
+
+    .heart-cloud {
+      position: fixed;
+      left: 56%;
+      top: 34%;
+      width: min(620px, 78vw);
+      height: min(390px, 54vh);
+      transform: translate(-50%, -50%);
+      z-index: 17;
+      pointer-events: none;
+      opacity: 0;
+      animation: cloudMemoryShow 22s ease forwards;
+    }
+
+    @keyframes cloudMemoryShow {
+      0%, 34% { opacity: 0; }
+      66%, 100% { opacity: 1; }
+    }
+
+    .heart-cloud span {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.13), rgba(255,255,255,0));
+      filter: blur(3px);
+    }
+
+    .heart-cloud.fade-out {
+      opacity: 0.12 !important;
+      filter: blur(6px);
+      transition: opacity 2.6s ease, filter 2.6s ease;
+    }
+
+    .cards-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 18;
+      pointer-events: none;
+    }
+
+    .card {
+      position: absolute;
+      padding: 9px 14px;
+      min-width: 98px;
+      border-radius: 16px;
+      text-align: center;
+      white-space: nowrap;
+      color: rgba(48, 42, 43, 0.92);
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.6px;
+      background:
+        linear-gradient(135deg,
+          rgba(255,255,252,0.88),
+          rgba(255,247,246,0.74),
+          rgba(246,230,232,0.60));
+      border: 1px solid rgba(255,255,255,0.62);
+      box-shadow:
+        0 12px 26px rgba(0,0,0,0.10),
+        inset 0 1px 0 rgba(255,255,255,0.72);
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.82);
+      transition:
+        left 4.2s cubic-bezier(.22,.61,.36,1),
+        top 4.2s cubic-bezier(.22,.61,.36,1),
+        opacity 1.1s ease,
+        transform 4.2s cubic-bezier(.22,.61,.36,1),
+        filter 2.6s ease;
+      will-change: left, top, opacity, transform;
+    }
+
+    .card.show {
+      opacity: 0.86;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .card.soft {
+      opacity: 0.54;
+      transform: translate(-50%, -50%) scale(0.88);
+      background:
+        linear-gradient(135deg,
+          rgba(255,255,252,0.55),
+          rgba(255,238,242,0.42),
+          rgba(255,255,255,0.28));
+    }
+
+    .cards-layer.fade-out .card {
+      opacity: 0.12 !important;
+      filter: blur(0.8px);
+      transition: opacity 2.8s ease, filter 2.8s ease;
+    }
+
+    /* =========================================================
+       INTRO
+    ========================================================= */
+
+    .intro {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      background:
+        radial-gradient(circle at center,
+          rgba(255,255,255,0.05),
+          rgba(0,0,0,0.92));
+      transition: opacity 2s ease, visibility 2s ease, transform 2s ease;
+      pointer-events: none;
+    }
+
+    .intro.hide {
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(1.04);
+    }
+
+    .intro-small {
+      font-size: 12px;
+      letter-spacing: 8px;
+      color: rgba(255,255,255,0.50);
+      margin-bottom: 18px;
+    }
+
+    .intro-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(46px, 8vw, 88px);
+      font-weight: 500;
+      letter-spacing: 3px;
+      color: #fffaf8;
+      text-shadow: 0 0 28px rgba(255,235,235,0.18);
+    }
+
+    .intro-line {
+      margin-top: 24px;
+      min-height: 32px;
+      padding: 0 24px;
+      font-size: clamp(15px, 2vw, 20px);
+      letter-spacing: 2px;
+      color: rgba(255,245,247,0.84);
+    }
+
+    .caret {
+      display: inline-block;
+      width: 1px;
+      height: 1.2em;
+      background: rgba(255,255,255,0.85);
+      vertical-align: -3px;
+      animation: blink 0.8s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* =========================================================
+       ENDING
+    ========================================================= */
+
+    .ending {
+      position: fixed;
+      inset: 0;
+      z-index: 52;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 3s ease;
+      padding: 0 24px;
+      background:
+        radial-gradient(circle at 50% 48%, rgba(255, 240, 232, 0.055), transparent 36%),
+        linear-gradient(to bottom, rgba(0,0,0,0.10), rgba(0,0,0,0.34));
+    }
+
+    .ending.show {
+      opacity: 1;
+    }
+
+    .ending-label {
+      font-size: 11px;
+      letter-spacing: 10px;
+      color: rgba(255,255,255,0.46);
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    .ending.show .ending-label {
+      animation: endingRise 2.4s ease forwards;
+    }
+
+    .ending-text {
+      position: relative;
+      font-family:
+        "Songti SC",
+        "STSong",
+        "Noto Serif SC",
+        "Times New Roman",
+        serif;
+      font-size: clamp(28px, 4.4vw, 52px);
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      line-height: 1.9;
+      color: rgba(255,250,248,0.98);
+      text-shadow:
+        0 0 18px rgba(255,230,220,0.24),
+        0 0 46px rgba(255,174,160,0.14);
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    .ending.show .ending-text {
+      animation: endingRise 3.2s ease 0.8s forwards;
+    }
+
+    .ending-text::before,
+    .ending-text::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      width: min(520px, 72vw);
+      height: 1px;
+      transform: translateX(-50%);
+      background:
+        linear-gradient(to right,
+          transparent,
+          rgba(255,255,255,0.42),
+          transparent);
+      opacity: 0;
+    }
+
+    .ending-text::before {
+      top: -24px;
+    }
+
+    .ending-text::after {
+      bottom: -26px;
+    }
+
+    .ending.show .ending-text::before,
+    .ending.show .ending-text::after {
+      animation: lineFade 3s ease 1.4s forwards;
+    }
+
+    .ending-note {
+      margin-top: 54px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 12px;
+      letter-spacing: 6px;
+      color: rgba(255,255,255,0.42);
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .ending.show .ending-note {
+      animation: endingRise 2.6s ease 2.5s forwards;
+    }
+
+    @keyframes endingRise {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes lineFade {
+      to { opacity: 1; }
+    }
+
+    /* =========================================================
+       FILM EFFECTS
+    ========================================================= */
+
+    .letter-top,
+    .letter-bottom {
+      position: fixed;
+      left: 0;
+      width: 100%;
+      height: 7vh;
+      background: rgba(0,0,0,0.86);
+      z-index: 40;
+      pointer-events: none;
+    }
+
+    .letter-top { top: 0; }
+    .letter-bottom { bottom: 0; }
+
+    .vignette {
+      position: fixed;
+      inset: 0;
+      z-index: 39;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at center,
+          transparent 0%,
+          transparent 52%,
+          rgba(0,0,0,0.25) 78%,
+          rgba(0,0,0,0.66) 100%);
+    }
+
+    .film-grain {
+      position: fixed;
+      inset: 0;
+      z-index: 38;
+      pointer-events: none;
+      opacity: 0.045;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.20) 0.6px, transparent 0.7px);
+      background-size: 7px 7px;
+      mix-blend-mode: soft-light;
+    }
+
+    .hint {
+      position: fixed;
+      left: 50%;
+      bottom: 4.5vh;
+      transform: translateX(-50%);
+      z-index: 55;
+      opacity: 0;
+      color: rgba(255,255,255,0.22);
+      font-size: 11px;
+      letter-spacing: 3px;
+      transition: opacity 1.5s ease;
+      pointer-events: none;
+    }
+
+    .hint.show {
+      opacity: 0.40;
+    }
+
+    .hint.hide {
+      opacity: 0;
+    }
+
+    @media (max-width: 768px) {
+      .horizon-glow {
+        width: 82vw;
+        height: 26vh;
+        top: 57%;
+      }
+
+      .sun {
+        width: 96px;
+        height: 96px;
+        left: 52%;
+      }
+
+      .palm.left {
+        left: -6%;
+        bottom: 9%;
+        transform: scale(0.72) rotate(-4deg);
+      }
+
+      .palm.right {
+        right: -9%;
+        bottom: 9%;
+        transform: scale(0.78) scaleX(-1) rotate(-4deg);
+      }
+
+      .heart-cloud {
+        left: 55%;
+        width: 86vw;
+      }
+
+      .card {
+        min-width: 78px;
+        padding: 7px 10px;
+        font-size: 10.5px;
+        border-radius: 13px;
+      }
+
+      .ending-text {
+        font-size: 27px;
+        letter-spacing: 0.08em;
+        line-height: 1.9;
+      }
+
+      .ending-label {
+        letter-spacing: 7px;
+      }
+
+      .ending-note {
+        letter-spacing: 4px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="scene">
+    <div class="sunset-clouds"></div>
+    <div class="horizon-glow"></div>
+    <div class="sun"></div>
+
+    <div class="sea">
+      <div class="gold-reflection"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="shore"></div>
+    </div>
+
+    <div class="boat"></div>
+    <div class="boat two"></div>
+
+    <div class="beach"></div>
+
+    <div class="palm left">
+      <div class="trunk"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+    </div>
+
+    <div class="palm right">
+      <div class="trunk"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+    </div>
+  </div>
+
+  <div class="heart-cloud" id="heartCloud"></div>
+  <div class="cards-layer" id="cardsLayer"></div>
+
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+  <div class="letter-top"></div>
+  <div class="letter-bottom"></div>
+
+  <div class="intro" id="intro">
+    <div class="intro-small">A QUIET FILM FOR YOU</div>
+    <div class="intro-title">For Maggie</div>
+    <div class="intro-line">
+      <span id="typedText"></span><span class="caret"></span>
+    </div>
+  </div>
+
+  <div class="ending" id="ending">
+    <div class="ending-label">UNTIL THE NEXT SUNSET</div>
+    <div class="ending-text">想和你一起<br />走遍所有想去的地方</div>
+    <div class="ending-note">FOR MAGGIE</div>
+  </div>
+
+  <div class="hint" id="hint">点击画面进入全屏 · ESC 退出</div>
+
+  <script>
+    const baseMessages = [
+      "管住嘴",
+      "保持好心情",
+      "别熬夜",
+      "好好爱自己",
+      "按时吃饭",
+      "注意身体",
+      "累了就休息",
+      "不开心要告诉我",
+      "照顾好自己",
+      "少吃冰的",
+      "记得吃早餐",
+      "别给自己太大压力",
+      "我会一直在",
+      "别皱眉",
+      "你值得被爱",
+      "明天也要开心"
+    ];
+
+    const messages = [
+      ...baseMessages,
+      ...baseMessages,
+      "我会一直在",
+      "你值得被爱"
+    ];
+
+    const typedText = document.getElementById("typedText");
+    const intro = document.getElementById("intro");
+    const cardsLayer = document.getElementById("cardsLayer");
+    const heartCloud = document.getElementById("heartCloud");
+    const ending = document.getElementById("ending");
+    const hint = document.getElementById("hint");
+
+    function typeIntro() {
+      const text = "A sunset, a quiet sea, and something I want to tell you.";
+      let i = 0;
+
+      const timer = setInterval(() => {
+        typedText.textContent = text.slice(0, i);
+        i++;
+
+        if (i > text.length) {
+          clearInterval(timer);
+          setTimeout(() => {
+            intro.classList.add("hide");
+          }, 2600);
+        }
+      }, 95);
+    }
+
+    function buildHeartCloud() {
+      const cloudPoints = [
+        [21, 37], [28, 29], [36, 24], [45, 23], [53, 27],
+        [61, 23], [70, 26], [77, 34], [80, 43], [76, 51],
+        [69, 58], [59, 64], [49, 69], [39, 67], [30, 61],
+        [23, 53], [18, 45],
+        [35, 41], [47, 37], [58, 41], [44, 53], [55, 54],
+        [34, 51], [64, 50]
+      ];
+
+      for (let i = 0; i < 52; i++) {
+        const p = cloudPoints[i % cloudPoints.length];
+        const dot = document.createElement("span");
+
+        const x = p[0] + (Math.random() * 12 - 6);
+        const y = p[1] + (Math.random() * 12 - 6);
+        const size = 38 + Math.random() * 54;
+
+        dot.style.left = x + "%";
+        dot.style.top = y + "%";
+        dot.style.width = size + "px";
+        dot.style.height = size + "px";
+
+        heartCloud.appendChild(dot);
+      }
+    }
+
+    function buildCards() {
+      const targets = [
+        [31, 31], [39, 25], [48, 23], [57, 25], [67, 24], [76, 30],
+        [82, 39], [79, 49], [71, 57], [62, 64], [53, 68], [43, 65],
+        [33, 58], [25, 49], [24, 40], [34, 43],
+        [44, 37], [54, 36], [64, 39], [73, 45], [65, 51], [54, 52],
+        [44, 51], [36, 47], [49, 58], [59, 59], [41, 32], [68, 33],
+        [29, 44], [78, 43], [46, 46], [60, 46], [52, 43], [54, 56]
+      ];
+
+      messages.forEach((msg, index) => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        if (index > 13 && index % 3 !== 0) {
+          card.classList.add("soft");
+        }
+
+        card.textContent = msg;
+        cardsLayer.appendChild(card);
+
+        const startSide = index % 4;
+
+        if (startSide === 0) {
+          card.style.left = "-18%";
+          card.style.top = 18 + Math.random() * 64 + "%";
+        } else if (startSide === 1) {
+          card.style.left = "118%";
+          card.style.top = 18 + Math.random() * 64 + "%";
+        } else if (startSide === 2) {
+          card.style.left = 12 + Math.random() * 76 + "%";
+          card.style.top = "-12%";
+        } else {
+          card.style.left = 12 + Math.random() * 76 + "%";
+          card.style.top = "112%";
+        }
+
+        const target = targets[index % targets.length];
+
+        setTimeout(() => {
+          card.classList.add("show");
+
+          const jitterX = Math.random() * 3.4 - 1.7;
+          const jitterY = Math.random() * 3.4 - 1.7;
+
+          card.style.left = target[0] + jitterX + "%";
+          card.style.top = target[1] + jitterY + "%";
+        }, 7600 + index * 245);
+      });
+    }
+
+    function showEnding() {
+      cardsLayer.classList.add("fade-out");
+      heartCloud.classList.add("fade-out");
+
+      setTimeout(() => {
+        ending.classList.add("show");
+      }, 1100);
+
+      setTimeout(() => {
+        hint.classList.add("show");
+      }, 3200);
+
+      setTimeout(() => {
+        hint.classList.add("hide");
+      }, 8500);
+    }
+
+    typeIntro();
+    buildHeartCloud();
+    buildCards();
+
+    setTimeout(() => {
+      intro.classList.add("hide");
+    }, 10000);
+
+    setTimeout(showEnding, 29200);
+
+    document.body.addEventListener("click", async () => {
+      try {
+        if (!document.fullscreenElement) {
+          await document.documentElement.requestFullscreen();
+        }
+      } catch (e) {}
+    });
+
+    window.addEventListener("keydown", async (e) => {
+      if (e.key === "Escape") {
+        try {
+          if (document.fullscreenElement) {
+            await document.exitFullscreen();
+          }
+        } catch (e) {}
+      }
+    });
+  </script>
+</body>
+</html>
