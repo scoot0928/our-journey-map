@@ -1,5 +1,6 @@
 :root {
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   color: #3d322d;
   background: #fff8f1;
 }
@@ -23,11 +24,56 @@ body {
 
 a {
   color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
 }
 
 .app-shell {
   min-height: 100vh;
 }
+
+/* Film intro */
+
+.film-intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #070b14;
+  overflow: hidden;
+}
+
+.film-intro-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.film-skip-button {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 100000;
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  border-radius: 999px;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 250, 248, 0.88);
+  font-size: 13px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.28);
+}
+
+.film-skip-button:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* Hero */
 
 .hero {
   min-height: 92vh;
@@ -71,6 +117,7 @@ a {
   background: rgba(255, 255, 255, 0.62);
   box-shadow: 0 24px 80px rgba(111, 79, 58, 0.13);
   backdrop-filter: blur(18px);
+  z-index: 2;
 }
 
 .eyebrow {
@@ -102,16 +149,37 @@ a {
   line-height: 1.8;
 }
 
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 36px;
+}
+
 .hero-button {
   display: inline-flex;
-  margin-top: 36px;
   padding: 14px 24px;
   border-radius: 999px;
   text-decoration: none;
+  border: none;
   background: #3d322d;
   color: #fff8ef;
   box-shadow: 0 14px 30px rgba(61, 50, 45, 0.22);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 15px;
 }
+
+.secondary-button {
+  background: rgba(255, 255, 255, 0.72);
+  color: #3d322d;
+  border: 1px solid rgba(177, 139, 105, 0.28);
+  box-shadow: 0 14px 30px rgba(111, 79, 58, 0.12);
+}
+
+/* Map */
 
 .map-section {
   padding: 72px 20px 96px;
@@ -172,7 +240,12 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle, rgba(255, 219, 232, 1) 0%, rgba(255, 186, 210, 0.52) 38%, rgba(255, 186, 210, 0) 72%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 219, 232, 1) 0%,
+    rgba(255, 186, 210, 0.52) 38%,
+    rgba(255, 186, 210, 0) 72%
+  );
   animation: pulseGlow 2.4s ease-in-out infinite;
 }
 
@@ -189,15 +262,19 @@ a {
 }
 
 @keyframes pulseGlow {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(0.92);
     filter: drop-shadow(0 0 8px rgba(255, 178, 205, 0.65));
   }
+
   50% {
     transform: scale(1.14);
     filter: drop-shadow(0 0 18px rgba(255, 150, 190, 0.95));
   }
 }
+
+/* Modal */
 
 .modal-backdrop {
   position: fixed;
@@ -214,6 +291,7 @@ a {
 .memory-card {
   position: relative;
   width: min(720px, 100%);
+  max-height: 92vh;
   overflow: hidden;
   border-radius: 32px;
   background: #fffaf5;
@@ -224,7 +302,7 @@ a {
   position: absolute;
   right: 16px;
   top: 16px;
-  z-index: 2;
+  z-index: 4;
   border: none;
   width: 42px;
   height: 42px;
@@ -254,6 +332,7 @@ a {
   object-fit: contain;
   display: block;
 }
+
 .slider-button {
   position: absolute;
   top: 50%;
@@ -293,6 +372,7 @@ a {
   font-size: 13px;
   backdrop-filter: blur(8px);
 }
+
 .memory-content {
   padding: 28px;
 }
@@ -336,6 +416,11 @@ a {
     font-size: 16px;
   }
 
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
   .map-frame {
     height: 560px;
     padding: 10px;
@@ -343,8 +428,8 @@ a {
   }
 
   .photo-slider {
-  height: min(62vh, 520px);
-}
+    height: min(62vh, 520px);
+  }
 
   .memory-content h3 {
     font-size: 30px;

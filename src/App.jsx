@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -36,131 +36,102 @@ const trips = [
       "/images/2026-xihu-hangzhou-05.jpeg",
     ],
   },
- {
-
-    id: 2,
-
-    title: "Guangzhou, China",
-
-    date: "2026-04-23 – 2026-04-28",
-
-    address: "Canton, Guangzhou",
-
-    position: [23.100556, 113.353611],
-
-    memory: "Canton Fair, a little drunk, and an important decision we made together.",
-
-    photos: [
-
-      "/images/2026-cantonfair-01.jpeg",
-
-      "/images/2026-cantonfair-02.jpeg",
-
-    ],
-
-  }, 
   {
-
-    id: 3,
-
-    title: "Hangzhou, China",
-
-    date: "2026-05-01",
-
-    address: "Hangzhou, Zhejiang",
-
-    position: [30.271, 120.161],
-
-    memory: "Stand-up comedy, laughter, and a night to remember.",
-
-    photos: [
-
-      "/images/2026-hangzhou-01.jpeg",
-
-      "/images/2026-hangzhou-02.jpeg",
-
-    ],
-
-  },
-    {
-
-    id: 4,
-
-    title: "Anji, China",
-
-    date: "2026-05-01 – 2026-05-03",
-
-    address: "Anji, Zhejiang",
-
-    position: [30.635, 119.709],
-
+    id: 2,
+    title: "Guangzhou, China",
+    date: "2026-04-23 – 2026-04-28",
+    address: "Canton, Guangzhou",
+    position: [23.100556, 113.353611],
     memory:
-
-      "Three meals a day. We climbed a mountain at dawn and drank alcohol at the summit. Sunset. Riding a bike at midnight.",
-
+      "Canton Fair, a little drunk, and an important decision we made together.",
     photos: [
-
-      "/images/2026-anji-1-01.jpeg",
-
-      "/images/2026-anji-1-02.jpeg",
-
-      "/images/2026-anji-1-03.jpeg",
-
-      "/images/2026-anji-1-04.jpeg",
-
-      "/images/2026-anji-1-05.jpeg",
-
-      "/images/2026-anji-1-06.jpeg",
-
-      "/images/2026-anji-1-07.jpeg",
-
-      "/images/2026-anji-1-08.jpeg",
-
-      "/images/2026-anji-1-09.jpeg",
-
-      "/images/2026-anji-1-10.jpeg",
-
-      "/images/2026-anji-1-11.jpeg",
-
-      "/images/2026-anji-1-12.jpeg",
-
-      "/images/2026-anji-1-13.jpeg",
-
+      "/images/2026-cantonfair-01.jpeg",
+      "/images/2026-cantonfair-02.jpeg",
     ],
-
   },
-    {
-
-    id: 5,
-
-    title: "Anji, China",
-
-    date: "2026-05-16 – 2026-05-17",
-
-    address: "Anji, Zhejiang",
-
-    position: [30.569531, 119.535782],
-
-    memory: "Holding hands, confessing love, and being in love.",
-
+  {
+    id: 3,
+    title: "Hangzhou, China",
+    date: "2026-05-01",
+    address: "Hangzhou, Zhejiang",
+    position: [30.271, 120.161],
+    memory: "Stand-up comedy, laughter, and a night to remember.",
     photos: [
-
-      "/images/2026-anji-2-01.jpeg",
-
-      "/images/2026-anji-2-02.jpeg",
-
-      "/images/2026-anji-2-03.jpeg",
-
-      "/images/2026-anji-2-04.jpeg",
-
+      "/images/2026-hangzhou-01.jpeg",
+      "/images/2026-hangzhou-02.jpeg",
     ],
-
+  },
+  {
+    id: 4,
+    title: "Anji, China",
+    date: "2026-05-01 – 2026-05-03",
+    address: "Anji, Zhejiang",
+    position: [30.635, 119.709],
+    memory:
+      "Three meals a day. We climbed a mountain at dawn and drank alcohol at the summit. Sunset. Riding a bike at midnight.",
+    photos: [
+      "/images/2026-anji-1-01.jpeg",
+      "/images/2026-anji-1-02.jpeg",
+      "/images/2026-anji-1-03.jpeg",
+      "/images/2026-anji-1-04.jpeg",
+      "/images/2026-anji-1-05.jpeg",
+      "/images/2026-anji-1-06.jpeg",
+      "/images/2026-anji-1-07.jpeg",
+      "/images/2026-anji-1-08.jpeg",
+      "/images/2026-anji-1-09.jpeg",
+      "/images/2026-anji-1-10.jpeg",
+      "/images/2026-anji-1-11.jpeg",
+      "/images/2026-anji-1-12.jpeg",
+      "/images/2026-anji-1-13.jpeg",
+    ],
+  },
+  {
+    id: 5,
+    title: "Anji, China",
+    date: "2026-05-16 – 2026-05-17",
+    address: "Anji, Zhejiang",
+    position: [30.569531, 119.535782],
+    memory: "Holding hands, confessing love, and being in love.",
+    photos: [
+      "/images/2026-anji-2-01.jpeg",
+      "/images/2026-anji-2-02.jpeg",
+      "/images/2026-anji-2-03.jpeg",
+      "/images/2026-anji-2-04.jpeg",
+    ],
   },
 ];
 
 export default function App() {
+  const [showFilmIntro, setShowFilmIntro] = useState(true);
   const [selectedTrip, setSelectedTrip] = useState(null);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowFilmIntro(false);
+    }, 43000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (showFilmIntro) {
+    return (
+      <div className="film-intro-screen">
+        <iframe
+          src="/film/index.html"
+          title="A Quiet Film for Maggie"
+          className="film-intro-frame"
+        />
+
+        <button
+          className="film-skip-button"
+          onClick={() => setShowFilmIntro(false)}
+        >
+          Enter Our Journey
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="app-shell">
@@ -184,9 +155,18 @@ export default function App() {
             us.
           </p>
 
-          <a href="#map" className="hero-button">
-            Enter Our Map
-          </a>
+          <div className="hero-actions">
+            <a href="#map" className="hero-button">
+              Enter Our Map
+            </a>
+
+            <button
+              className="hero-button secondary-button"
+              onClick={() => setShowFilmIntro(true)}
+            >
+              Replay the Film
+            </button>
+          </div>
         </motion.div>
       </section>
 
@@ -252,6 +232,7 @@ export default function App() {
                 <img
                   src={selectedTrip.photos[currentPhotoIndex]}
                   alt={`${selectedTrip.title} ${currentPhotoIndex + 1}`}
+                  className="photo-main"
                 />
 
                 {selectedTrip.photos.length > 1 && (
